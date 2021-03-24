@@ -10,6 +10,9 @@
         .navbar-default{
             border-radius: 0;
         }
+        .navbar{
+            margin-bottom: 0px;
+        }
     </style>
     {% block css %}{% endblock %}
 </head>
@@ -25,7 +28,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">爬虫</a>
+      <a class="navbar-brand" href="{% url 'index' %}">爬虫</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,18 +47,22 @@
         </li>
           <li><a href="#">使用说明</a></li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+          {% if request.tracer %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false">{{ request.tracer.username }}<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">管理中心</a></li>
+                        <li role="separator" class="divider"></li>
+                    <li><a href="#">退  出</a></li>
+                </ul>
+              </li>
+          {% else %}
+              <li><a href="{% url 'login' %}">登录</a></li>
+              <li><a href="{% url 'register' %}">注册</a></li>
+          {% endif %}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

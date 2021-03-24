@@ -49,7 +49,8 @@ def login_sms(request):
         mobile_phone = form.cleaned_data['mobile_phone']
         #  用户信息放入session
         user_object = models.UserInfo.objects.filter(mobile_phone=mobile_phone).first()
-        # request.session['user_name'] = user_object.username
+        request.session['user_id'] = user_object.id
+        request.session.set_expiry(60 * 60 * 24 * 24)  # 主动修改session的过期时间
         print(user_object.username, user_object.email)
         return JsonResponse({"status": True, 'data': "/index/"})
     return JsonResponse({"status": False, 'error': form.errors})
@@ -73,8 +74,11 @@ def login(request):
         user_object = models.UserInfo.objects.filter(Q(email=username) | Q(mobile_phone=username)).filter(
             password=password).first()
 
-        if not user_object:
-            # 用户名密码正确
+        if user_object:
+            # 用户名密码正确 用户登录成功
+            request.session['user_id'] = user_object.id
+            request.session.set_expiry(60 * 60 * 24 * 24)  # 主动修改session的过期时间
+
             return redirect('index')
         form.add_error('username', '用户名或密码错误')
     return render(request, 'login.html', {'form': form})
@@ -87,7 +91,7 @@ def image_code(request):
     image_object, code = check_code()
 
     request.session['image_code'] = code
-    request.session.set_expiry(60)  # 主动修改session的过期时间
+    request.session.set_expiry(60 )  # 主动修改session的过期时间
 
     stream = BytesIO()
     image_object.save(stream, 'png')
