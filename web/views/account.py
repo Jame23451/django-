@@ -91,7 +91,7 @@ def image_code(request):
     image_object, code = check_code()
 
     request.session['image_code'] = code
-    request.session.set_expiry(60 )  # 主动修改session的过期时间
+    request.session.set_expiry(60)  # 主动修改session的过期时间
 
     stream = BytesIO()
     image_object.save(stream, 'png')

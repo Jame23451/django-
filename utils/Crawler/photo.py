@@ -16,7 +16,6 @@ def saveImg(name,x):
         20) + '&gsm=3c&ct=&ic=0&lm=-1&width=0&height=0 '
     res = requests.get(url, headers=headers)
     htlm_1 = res.content.decode()
-    #print(htlm_1)
     a = re.findall('"objURL":"(.*?)",', htlm_1)
     if not os.path.exists(name_1):
         os.makedirs(name_1)
