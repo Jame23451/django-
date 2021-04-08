@@ -1,0 +1,44 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block title %}搜索图片{% endblock %}
+
+
+{% block css %}
+    <style>
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<div class="page">
+    <div class="row">
+  <div class="col-xs-6 col-md-3">
+    <a class="thumbnail">
+      <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01306c5a61ca76a80120121f569f6f.jpg%401280w_1l_2o_100sh.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620466681&t=1760e32c661c7a426193e697e3fe6633">
+    </a>
+  </div>
+</div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+
+   {#function  newC(){#}
+   {#     $('.thumbnail').bind("click",download('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01306c5a61ca76a80120121f569f6f.jpg%401280w_1l_2o_100sh.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620466681&t=1760e32c661c7a426193e697e3fe6633'))#}
+   {# }#}
+   {# function  download(src){#}
+   {#     console.log(1111111)#}
+   {#     const a = document.createElement('a');#}
+   {#     a.setAttribute("href",src)#}
+   {#     a.setAttribute("download","")#}
+   {#     const evObj = document.createEvent('MouseEvents');#}
+   {#     evObj.initMouseEvent('click',true,true,window,0,0,0,0,0,false,false,true,false,0,null)#}
+   {#     a.dispatchEvent(evObj)#}
+   {# }#}
+   {# newC()#}
+    </script>
+{% endblock %}

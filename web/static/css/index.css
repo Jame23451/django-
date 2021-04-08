@@ -1,0 +1,24 @@
+.index {
+    width: 800px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.index .title {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.index .form-group {
+    margin-bottom: 20px;
+}
+
+.toCenter{
+    width: 100%;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

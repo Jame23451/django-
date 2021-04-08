@@ -12,7 +12,7 @@ class UserHistory(models.Model):
     username = models.CharField(verbose_name='用户名', max_length=32)
     mobile_phone = models.CharField(verbose_name='手机号', max_length=32)
     date = models.DateTimeField(verbose_name='日期', auto_now_add=True)
-    path = models.CharField(verbose_name='路径', max_length=32)
+    search = models.CharField(verbose_name='路径', max_length=32)
 
 
 class UserTreasure(models.Model):

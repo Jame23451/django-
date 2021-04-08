@@ -1,9 +1,11 @@
 {% extends 'layout/basic.html' %}
 {% load static %}
 
+
 {% block title %}首页{% endblock %}
 
 {% block css%}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <style>
         img{
             width: 100%;
@@ -12,7 +14,53 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <img src="{% static 'img/index/index.png' %}">
+    <body class="text-center" style="background-image: url({% static 'img/index/index.png' %});background-size: 100% ;background-repeat: no-repeat">
+    <div class="index">
+        <div class="title" style="margin-bottom: 50px">图片库</div>
+        <div class="toCenter">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button id="choose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              选择搜索方式
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" id="getMenu">
+                <li><a href="#">百度(默认)</a></li>
+                <li><a href="#">搜狗</a></li>
+                <li><a href="#">Bing</a></li>
+            </ul>
+          </div>
+        </div>
+        <div  class="col-lg-6">
+            <div align="center" class="input-group">
+                <input id="inputBtn" type="text" class="form-control" placeholder="输入关键字...">
+                <span  class="input-group-btn">
+                    <button id="searchBtn" class="btn btn-default" type="button">获取图片</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+</div>
     </div>
+
+
+
+
+{% endblock %}
+{% block js %}
+    <script>
+        $(function(){
+            $('#getMenu').click(function (e){
+                console.log("点击了",e.target.innerText)
+               $('#choose').text(e.target.innerText)
+            })
+        })
+        $(function(){
+            $('#searchBtn').click(function (e){
+                console.log(e)
+            })
+        })
+
+    </script>
+
+
 {% endblock %}

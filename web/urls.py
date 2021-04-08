@@ -8,4 +8,6 @@ urlpatterns = [
     url(r'^image/code/$', account.image_code, name='image_code'),
     url(r'^send/sms/$', account.send_sms, name='send_sms'),
     url(r'^index/$', home.index, name='index'),
+    url(r'^search/$', home.search, name='search'),
+
 ]
