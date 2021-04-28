@@ -124,7 +124,16 @@ TENCENT_SMS_APP_KEY = "8cc5b87123y423423412387930004"
 # 自己腾讯云创建签名时填写的签名内容（使用公众号的话这个值一般是公众号全称或简称）
 TENCENT_SMS_SIGN = "Python之路"
 
-
+# ########### 登录白名单：无需登录就可以访问的页面 ###########
+WHITE_REGEX_URL_LIST = [
+    "/register/",
+    "/send/sms/",
+    "/login/",
+    "/login/sms/",
+    "/image/code/",
+    "/index/",
+    "/price/",
+]
 try:
     from .local_settings import *
 except ImportError:

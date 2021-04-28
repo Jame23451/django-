@@ -1,6 +1,8 @@
 """
 用户账户相关功能:注册、短信、登录、注销
 """
+import datetime
+import uuid
 from io import BytesIO
 from django.db.models import Q
 from utils.image_code import check_code
@@ -19,7 +21,20 @@ def register(request):
     form = RegisterModelForm(data=request.POST)
     if form.is_valid():
         # 验证通过，写入数据库(密码要是密文)
+        # instance = form.save,在数据库中新增一条数据，并将新增的这条数据赋值给instance
+        # 用户表中新建一条数据(注册)
         instance = form.save()
+        # 创建交易记录
+        policy_object = models.PricePolicy.objects.filter(category=1, title="免费版").first()
+        models.Transaction.objects.create(
+            status=2,
+            order=str(uuid.uuid4()),
+            user=instance,
+            price_policy=policy_object,
+            count=0,
+            price=0,
+            start_datetime=datetime.datetime.now()
+        )
         return JsonResponse({'status': True, 'data': '/login/'})
     return JsonResponse({'status': False, 'error': form.errors})
 
@@ -97,3 +112,8 @@ def image_code(request):
     image_object.save(stream, 'png')
 
     return HttpResponse(stream.getvalue())
+
+
+def logout(request):
+    request.session.flush()
+    return redirect('login')

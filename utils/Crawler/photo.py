@@ -38,8 +38,9 @@ def saveImg(username, tel, name, x):
     #             print('第' + str(num) + '张图片无法下载------------')
     #             print(str(e))
     #             continue
-    #         f = open(name_1 + name + str(num + 1) + '.jpg', 'ab')
+    #
     #         print('---------正在下载第' + str(num + 1) + '张图片----------')
+    #         f = open(name_1 + name + str(num + 1) + '.jpg', 'ab')
     #         f.write(img.content)
     #         f.close()
     #         num = num + 1

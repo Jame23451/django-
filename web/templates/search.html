@@ -12,15 +12,61 @@
 
 
 {% block content %}
-<div class="page">
-    <div class="row">
-  <div class="col-xs-6 col-md-3">
-    <a class="thumbnail">
-      <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01306c5a61ca76a80120121f569f6f.jpg%401280w_1l_2o_100sh.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620466681&t=1760e32c661c7a426193e697e3fe6633">
-    </a>
-  </div>
+    <body>
+    <div id="searchTitle">
+        <div style="margin-bottom: 10px;font-size: 30px;margin-left: 20px;margin-top:10px">图片库</div>
+        <div style="margin-left: 20px;display: flex">
+            <div style="margin-bottom: 10px" class="btn-group" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button id="choose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  选择搜索方式
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="getMenu">
+                    <li><a href="#">百度(默认)</a></li>
+                    <li><a href="#">搜狗</a></li>
+                    <li><a href="#">Bing</a></li>
+                </ul>
+        </div>
+    </div>
+    <div  class="col-lg-6">
+            <div align="center" class="input-group">
+                <input id="inputBtn" type="text" class="form-control" placeholder="输入关键字...">
+                <span  class="input-group-btn">
+                    <button id="searchBtn" class="btn btn-default" type="button">获取图片</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div>
+    </div>
+      <div class="col-xs-6 col-md-3">
+        <a class="thumbnail">
+          <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01306c5a61ca76a80120121f569f6f.jpg%401280w_1l_2o_100sh.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620466681&t=1760e32c661c7a426193e697e3fe6633">
+        </a>
+    </div>
+    <div class="page-footer" style="position: absolute;min-height: 100%;height: auto;width: 100%;text-align: center">
+        <nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 </div>
-</div>
+    </body>
+
 {% endblock %}
 
 

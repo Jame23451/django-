@@ -121,9 +121,9 @@ class SendSmsForm(forms.Form):
 
         # 发短信
         code = random.randrange(1000, 9999)
-        # sms = send_sms_single(mobile_phone, template_id, [code, ])
-        # if sms['result'] != 0:
-        #     raise ValidationError("短信发送失败,{}".format(sms['errmsg']))
+        sms = send_sms_single(mobile_phone, template_id, [code, ])
+        if sms['result'] != 0:
+            raise ValidationError("短信发送失败,{}".format(sms['errmsg']))
 
         # 验证码写入redis(django-redis)
         conn = get_redis_connection()
@@ -177,7 +177,6 @@ class LoginForm(BootStrapForm, forms.Form):
     def __init__(self, request, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.request = request
-        print(self.request.session.get('image_code'))
 
     def clean_password(self):
         pwd = self.cleaned_data['password']
@@ -185,12 +184,13 @@ class LoginForm(BootStrapForm, forms.Form):
 
     def clean_code(self):
         """钩子 图片验证码是否正确?"""
-        #读取用户输入的验证码
+        # 读取用户输入的验证码
         code = self.cleaned_data['code']
 
-        #去session中获取自己的验证码
+        # 去session中获取自己的验证码
         session_code = self.request.session.get('image_code')
         if not session_code:
             raise ValidationError('验证码已过期,请重新获取')
-        if code.upper() == session_code.upper():
+        if code.strip().upper() != session_code.strip().upper():
             raise ValidationError('验证码输入错误')
+        return code
