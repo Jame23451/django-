@@ -67,13 +67,16 @@ class Transaction(models.Model):
 class Project(models.Model):
     """收藏表"""
     COLOR_CHOICES = (
-        (1, "#56b8eb"),
-        (2, "#f28033"),
+        (1, "#000000"),
+        (2, "#ffffff"),
         (3, "#ebc656"),
         (4, "#a2d148"),
         (5, "#20BFA4"),
         (6, "#7461c2"),
         (7, "#20bfa3"),
+        (8, "#56b8eb"),
+        (9, "#f28033"),
+        (10, "#ffc0cb"),
     )
     name = models.CharField(verbose_name='收藏文件夹名', max_length=32)
     color = models.SmallIntegerField(verbose_name='颜色', choices=COLOR_CHOICES, default=1)
