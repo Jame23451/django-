@@ -9,20 +9,29 @@ import datetime
 name_1 = './photo/'
 
 
-def saveImg(username, tel, name, x):
+def getImgList(userid, target, pn):
     num = 0
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                              'Chrome/84.0.4147.125 Safari/537.36'}
-    url = 'https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=' + name + '&pn=' + str(
-        20) + '&gsm=3c&ct=&ic=0&lm=-1&width=0&height=0 '
+    url = 'https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=' + target + '&pn=' + pn + '&gsm=3c&ct=&ic=0&lm=-1&width=0&height=0 '
     res = requests.get(url, headers=headers)
     htlm_1 = res.content.decode()
+    #print(htlm_1)
     a = re.findall('"objURL":"(.*?)",', htlm_1)
-    print(a)
+    if re.findall(r'找到相关图片约.*张', htlm_1):
+        findnum = re.findall(r'找到相关图片约.*张', htlm_1)[0].replace(',', '')
+        num = findnum.split('约', 1)[1]
+        num = num.split("张")[0]
+    else:
+        findnum = re.findall(r'找到相关图片.*张', htlm_1)[0].replace(',', '')
+        num = findnum.split('片', 1)[1]
+        num = num.split("张")[0]
+    return num, findnum, a
     # if not os.path.exists(name_1):
     #     os.makedirs(name_1)
     # for b in a:
     #     print(x, num)
+    #
     #     if num == int(x):
     #         break
     #     else:
@@ -30,7 +39,7 @@ def saveImg(username, tel, name, x):
     #             img = requests.get(b)
     #             image_b = io.BytesIO(img.content).read()
     #             size = len(image_b)
-    #             if size / 1e3 < 1:
+    #             if size < 1e4:  # 小于10kb
     #                 continue
     #             print("{} kb\n".format(size / 1e3))
     #
@@ -47,14 +56,11 @@ def saveImg(username, tel, name, x):
     # models.UserHistory.objects.create(
     #     username=username,
     #     mobile_phone=tel,
-    #     # path='./photo/' + name + str(num + 1) + '.jpg',
     #     search=name,
     #     date=datetime.datetime.now()
     # )
 
 
 if __name__ == '__main__':
-    name = input('您要爬取什么图片')
-    x = input('您要爬取几张呢?，输入1等于60张图片。')
-    saveImg("a","b",name, x)
-print('下载完成')
+    print(getImgList(userid=3, target="张恪靖", pn="0")[0])
+    print(getImgList(userid=3, target="张恪靖", pn="0")[1])

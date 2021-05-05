@@ -4,7 +4,7 @@
 import time
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
-
+from scripts import create_folder
 from web.forms.project import ProjectModelForm
 from web import models
 
@@ -32,8 +32,8 @@ def project_list(request):
     if form.is_valid():
         form.instance.creator = request.tracer.user
         form.save()
+        create_folder.addAlbum(user_id=str(form.instance.creator_id),filename=form.instance.name)
         return JsonResponse({'status': True})
-
     return JsonResponse({'status': False, 'error': form.errors})
 
 

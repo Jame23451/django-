@@ -12,9 +12,7 @@ config = CosConfig(Region=region, SecretId=secret_id, SecretKey=secret_key)
 # 2. 获取客户端对象
 client = CosS3Client(config)
 
-response = client.upload_file(
-    Bucket='zhaopian-1302230784',
-    LocalFilePath='code.png',
-    Key='p2.png',
+response = client.create_bucket(
+    Bucket='examplebucket-1302230784',
+    ACL='public-read',
 )
-print(response['ETag'])

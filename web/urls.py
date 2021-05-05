@@ -1,6 +1,5 @@
 from django.conf.urls import url, include
-from web.views import account,home,project,manage
-
+from web.views import account, home, project, manage, search
 
 urlpatterns = [
     url(r'^register/$', account.register, name='register'),
@@ -10,7 +9,9 @@ urlpatterns = [
     url(r'^send/sms/$', account.send_sms, name='send_sms'),
     url(r'^logout/$', account.logout, name='logout'),
     url(r'^index/$', home.index, name='index'),
-    url(r'^search/$', home.search, name='search'),
+    # 搜索页面
+    url(r'^search/$', search.search, name='search'),
+    url(r'^search/download/$', search.download, name='download'),
 
     # 收藏夹
     url(r'^project/list/$', project.project_list, name='project_list'),
