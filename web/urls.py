@@ -5,6 +5,7 @@ urlpatterns = [
     url(r'^register/$', account.register, name='register'),
     url(r'^login/sms/$', account.login_sms, name='login_sms'),
     url(r'^login/$', account.login, name='login'),
+    url(r'^loginAdmin/$',account.loginAdmin,name='loginAdmin'),
     url(r'^image/code/$', account.image_code, name='image_code'),
     url(r'^send/sms/$', account.send_sms, name='send_sms'),
     url(r'^logout/$', account.logout, name='logout'),
@@ -12,6 +13,7 @@ urlpatterns = [
     # 搜索页面
     url(r'^search/$', search.search, name='search'),
     url(r'^search/download/$', search.download, name='download'),
+    url(r'^search/addpng/$', search.addpng, name='addpng'),
 
     # 收藏夹
     url(r'^project/list/$', project.project_list, name='project_list'),

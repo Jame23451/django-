@@ -31,23 +31,6 @@
       <a class="navbar-brand" href="{% url 'index' %}">爬虫</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-{#          <li><a href="#">爬百科</a></li>#}
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">爬图片 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">IMG</a></li>
-            <li><a href="#">JPG</a></li>
-            <li><a href="#">PNG</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">网页所有图片</a></li>
-          </ul>
-        </li>
-          <li><a href="#">使用说明</a></li>
-      </ul>
-
       <ul class="nav navbar-nav navbar-right">
           {% if request.tracer.user %}
               <li class="dropdown">
@@ -62,6 +45,7 @@
           {% else %}
               <li><a href="{% url 'login' %}">登录</a></li>
               <li><a href="{% url 'register' %}">注册</a></li>
+              <li><a href="{% url 'loginAdmin' %}">管理员登录</a></li>
           {% endif %}
       </ul>
     </div><!-- /.navbar-collapse -->

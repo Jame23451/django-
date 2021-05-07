@@ -32,3 +32,14 @@ def manage_menu_list(request):
             item['class'] = 'active'
 
     return {'data_list': data_list}
+
+
+@register.inclusion_tag('inclusion/my_project_list.html')
+def my_project_list(request):
+    # 1. 获我创建的所有项目
+    my_project_list = models.Project.objects.filter(creator=request.tracer.user)
+
+    # 2. 获我参与的所有项目
+    star_project_list = models.Project.objects.filter(creator=request.tracer.user, star=True)
+
+    return {'my': my_project_list, 'star': star_project_list, 'request': request}

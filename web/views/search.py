@@ -1,14 +1,16 @@
 import requests
-from django.http import HttpResponse, request
-from django.shortcuts import render
+from django.http import HttpResponse, request, JsonResponse
+from django.shortcuts import render, redirect
 from django.utils.encoding import escape_uri_path
+
+from scripts.create_folder import addImgToAlbum
 from utils.Crawler import photo
 
 
 def search(request):
-    print(request.POST['question'])
+    # print(request.POST['question'])
     print(request.POST)
-    print(request.tracer.user.id)
+    # print(request.tracer.user.id)
     if not request.POST['question']:
         return render(request, 'index.html')
     resultList = photo.getImgList(target=request.POST['question'], pn="1", userid=request.tracer.user.id)
@@ -26,16 +28,25 @@ def download(request):
         # 文件分块处理(适用于大文件)
         data = res.content
 
-        #设置content_type=application/octet-stream 用于提示下载框
+        # 设置content_type=application/octet-stream 用于提示下载框
         response = HttpResponse(data, content_type="application/octet-stream")
 
-        response['Content-Disposition'] = "attachment; filename={}".format(escape_uri_path(request.POST['question']))+".png"
+        response['Content-Disposition'] = "attachment; filename={}".format(
+            escape_uri_path(request.POST['question'])) + ".png"
         return response
 
     return render(request, 'search.html')
+
+
 # def download(request, url, question):
 #     res = request.get(url)
 #     data = res.content
 #     response = HttpResponse(data)
 #     response['Content-Disposition'] = "attachment; filename={}".format(question)
 #     return response
+
+def addpng(request):
+    print(request.POST)
+    addImgToAlbum(user_id=request.tracer.user.id, project=request.POST['project_name'],
+                  filename=request.POST['imgname'], url=request.POST['imgurl'])
+    return render(request, 'index.html', {'question': request.POST['imgname']})

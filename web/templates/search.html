@@ -1,5 +1,6 @@
 {% extends 'layout/basic.html' %}
 {% load static %}
+{% load project %}
 
 {% block title %}搜索图片{% endblock %}
 
@@ -19,7 +20,6 @@
 
 
 {% block content %}
-    <body>
     <div id="searchTitle">
         <div style="margin-bottom: 10px;font-size: 30px;margin-left: 20px;margin-top:10px">图片库</div>
         <div style="margin-left: 20px;display: flex">
@@ -47,20 +47,21 @@
         <a style="color: #8c8c8c;margin-left:20px">{{ str }}</a>
         <div class="row">
             {% for item in img_list %}
-                <form action="/search/download/" method="post">
-                {% csrf_token %}
                   <div class="col-xs-6 col-md-3">
                     <a class="thumbnail" style="width: 100%;height: 400px">
-                        <img style="width:100%;height:100%;" src={{ item }} alt="{% static 'img/index/图片加载异常.jpeg' %}">
+                        <img  id="imgitem" style="width:100%;height:100%;" src={{ item }} alt="{% static 'img/index/图片加载异常.jpeg' %}">
                         <div>
-                            <input type="text" value={{ item }} name="imgsrc" style="display: none;">
-                            <input type="text" value={{ question }} name="question" style="display: none;">
+                            <form action="/search/download/" method="post">
+                                {% csrf_token %}
+                                <input type="text" value={{ item }} name="imgsrc" style="display: none;">
+                                <input type="text" value={{ question }} name="question" id="question" style="display: none;">
                             <button name="download" value="1" type="submit" style="float:right;margin-top: 5px;margin-bottom: 5px;"><i class="fa fa-download fa-lg"></i></button>
-                            <button name="treasure" value="1" type="submit" style="float:right;margin-top: 5px;margin-bottom: 5px;"><i class="fa fa-star-o fa-lg"></i></button>
+                            </form>
+                            <button data-toggle="modal" data-target="#addModal" style="float:right;margin-top: 5px;margin-bottom: 5px;" onclick="Values('{{ item }}')"><i class="fa fa-star-o fa-lg"></i></button>
+{#                            <button name="treasure" value="1" type="submit" style="float:right;margin-top: 5px;margin-bottom: 5px;"><i class="fa fa-star-o fa-lg"></i></button>#}
                         </div>
                     </a>
                   </div>
-                </form>
             {% endfor %}
         </div>
 {#    导航条#}
@@ -83,5 +84,72 @@
             </li>
           </ul>
         </nav>
-    </body>
+    <!-- Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加到收藏夹</h4>
+              </div>
+              <div class="modal-body">
+                    {% my_project_list request %}
+
+                    {% if request.tracer.project %}
+                        {% manage_menu_list request %}
+                    {% endif %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
 {% endblock %}
+{% block js %}
+    <script>
+
+        $("#addModal").modal("hide");
+        function Values(ID){
+            let i;
+            console.log(ID)
+            for (i = 0; i<document.getElementsByName("imgurl").length; i++){
+                   document.getElementsByName("imgurl")[i].value=ID
+            }
+            const question = document.getElementsByName("question")[0].value;
+            for (i = 0; i<document.getElementsByName("imgname").length; i++) {
+                document.getElementsByName("imgname")[i].value=question
+            }
+        }
+    </script>
+{% endblock %}
+{#{% block js %}#}
+{#    <script src = "{% static 'js/jquery-3.4.1.min.js' %}"></script>#}
+{#    <script>#}
+{#        //页面整个框架加载完成之后会执行的函数#}
+{#        $(function (){#}
+{#            bindClickImgAdd()#}
+{#        });#}
+{#        //点击提交(注册)#}
+{#        function bindClickImgAdd() {#}
+{#            $('#btnAdd').click(function (){#}
+{#                console.log('点击了')#}
+{#                //收集表单中的数据(找到每一个字段)#}
+{#                $.ajax({#}
+{#                    url:"{% url 'addpng' %}",#}
+{#                    type: "POST",#}
+{#                    data: {project_id:$('#project_id').val()}, //所有字段数据+csrf token#}
+{#                    dataType: "JSON",#}
+{#                    success:function (res) {#}
+{#                        if(res.status){#}
+{#                            location.href = res.data;#}
+{#                        }else {#}
+{##}
+{#                        }#}
+{#                    }#}
+{#                })#}
+{#                //发送到后台#}
+{#            })#}
+{#        }#}
+{#    </script>#}
+{#{% endblock %}#}
