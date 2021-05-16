@@ -4,7 +4,7 @@
 import time
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
-from scripts import create_folder
+from script import create_folder
 from web.forms.project import ProjectModelForm
 from web import models
 
@@ -32,7 +32,7 @@ def project_list(request):
     if form.is_valid():
         form.instance.creator = request.tracer.user
         form.save()
-        create_folder.addAlbum(user_id=str(form.instance.creator_id),filename=form.instance.name)
+        create_folder.addAlbum(user_id=str(form.instance.creator_id), filename=form.instance.name)
         return JsonResponse({'status': True})
     return JsonResponse({'status': False, 'error': form.errors})
 
@@ -47,3 +47,20 @@ def project_unstar(request, project_id):
     """ 取消星标 """
     models.Project.objects.filter(id=project_id, creator=request.tracer.user).update(star=False)
     return redirect('project_list')
+
+# def download(request):
+#     print(request.POST)
+#     if request.POST['download']:
+#         res = requests.get(request.POST['imgsrc'])
+#
+#         # 文件分块处理(适用于大文件)
+#         data = res.content
+#
+#         # 设置content_type=application/octet-stream 用于提示下载框
+#         response = HttpResponse(data, content_type="application/octet-stream")
+#
+#         response['Content-Disposition'] = "attachment; filename={}".format(
+#             escape_uri_path(request.POST['question'])) + ".png"
+#         return response
+#
+#     return render(request, 'search.html')

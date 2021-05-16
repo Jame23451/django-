@@ -7,7 +7,7 @@ from io import BytesIO
 from django.db.models import Q
 from utils.image_code import check_code
 from django.shortcuts import render, HttpResponse, redirect
-from web.forms.account import RegisterModelForm, SendSmsForm, LoginSMSForm, LoginForm
+from web.forms.account import RegisterModelForm, SendSmsForm, LoginSMSForm, LoginForm, LoginAdminForm
 from django.http import JsonResponse
 from web import models
 
@@ -23,18 +23,9 @@ def register(request):
         # 验证通过，写入数据库(密码要是密文)
         # instance = form.save,在数据库中新增一条数据，并将新增的这条数据赋值给instance
         # 用户表中新建一条数据(注册)
-        instance = form.save()
+        form.instance.isvip = False
+        form.save()
         # 创建交易记录
-        policy_object = models.PricePolicy.objects.filter(category=1, title="免费版").first()
-        models.Transaction.objects.create(
-            status=2,
-            order=str(uuid.uuid4()),
-            user=instance,
-            price_policy=policy_object,
-            count=0,
-            price=0,
-            start_datetime=datetime.datetime.now()
-        )
         return JsonResponse({'status': True, 'data': '/login/'})
     return JsonResponse({'status': False, 'error': form.errors})
 
@@ -117,6 +108,3 @@ def image_code(request):
 def logout(request):
     request.session.flush()
     return redirect('login')
-
-def loginAdmin(request):
-    pass

@@ -22,8 +22,6 @@ def all_project_list(request):
 def manage_menu_list(request):
     data_list = [
         {'title': '概览', 'url': reverse("dashboard", kwargs={'project_id': request.tracer.project.id})},
-        {'title': '详情', 'url': reverse("file", kwargs={'project_id': request.tracer.project.id})},
-        {'title': '配置', 'url': reverse("setting", kwargs={'project_id': request.tracer.project.id})}
     ]
 
     for item in data_list:

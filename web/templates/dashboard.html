@@ -1,5 +1,25 @@
 {% extends 'layout/manage.html' %}
+{% load static %}
+
 
 {% block content %}
-    <h1>概览</h1>
+    <h1 style="margin-left: 5px">{{ project_name }}</h1>
+    <div class="row">
+    {% for item in filepath %}
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail" style="width: 100%;height: 380px">
+              <img style="width: 100%;height: 280px;" src="{% static item.file %}" alt="图片无法显示">
+              <div class="caption">
+                <h4>{{item.name }}</h4>
+                <p><a href="#" class="btn btn-primary" role="button">下载</a> <a href="#" class="btn btn-default" role="button">删除</a></p>
+              </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <div style="text-align: center;color: darkgray">
+                <h5> 版权所有©   曾仕邦 </h5>
+                <h5> 2018软件工程实验班 </h5>
+                <h5>   201821096024  </h5>
+            </div>
 {% endblock %}

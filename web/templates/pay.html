@@ -1,0 +1,30 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>付款</title>
+</head>
+<body>
+    <div class="container">
+         <div class="jumbotron" style="text-align: center;padding-top: 15px">
+            <h2>感谢支持</h2>
+            <img src="{% static 'img/index/支付宝.JPG' %}" alt="" style="width: 400px">
+             <form action="/price/complite/" method="post">
+                 {% csrf_token %}
+                 <p style="padding-top: 15px"><button type="submit" class="btn btn-lg btn-success" href="#"  role="button">支付完成</button></p>
+             </form>
+             <div style="color:darkgray;text-align: center;margin-top: 20px">
+        <h5> 版权所有©   曾仕邦 </h5>
+        <h5> 2018软件工程实验班 </h5>
+        <h5>   201821096024  </h5>
+    </div>
+          </div>
+
+    </div>
+
+</body>
+</html>
+{% endblock %}

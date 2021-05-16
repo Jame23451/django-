@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app01.apps.App01Config',
     'web.apps.WebConfig'
 ]
 
@@ -116,6 +115,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+IMG_PATH = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'web/static/media').replace('\\', '/')
+
+
 
 # 自己应用ID
 TENCENT_SMS_APP_ID = 112142311
@@ -131,8 +134,12 @@ WHITE_REGEX_URL_LIST = [
     "/login/",
     "/login/sms/",
     "/image/code/",
-    "/index/",
+    "/loginAdmin/",
+    "/admin/login/",
     "/price/",
+    "/admin/",
+    "/admin/password_change/"
+    "/"
 ]
 try:
     from .local_settings import *

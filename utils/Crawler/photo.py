@@ -1,5 +1,5 @@
 import io
-from scripts import base
+from script import base
 import requests
 import re
 import os

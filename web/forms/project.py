@@ -11,6 +11,7 @@ from web import models
 
 class ProjectModelForm(BootStrapForm, forms.ModelForm):
     bootstrap_class_exclude = ['color']
+
     # desc = forms.CharField(widget=forms.Textarea(attrs={'xx': 123}))
     class Meta:
         model = models.Project
@@ -39,7 +40,7 @@ class ProjectModelForm(BootStrapForm, forms.ModelForm):
         # 现在已创建多少项目？
         count = models.Project.objects.filter(creator=self.request.tracer.user).count()
 
-        if count >= self.request.tracer.price_policy.project_num:
+        if not self.request.tracer.user.isvip and count >= 5:
             raise ValidationError('收藏夹个数超限，请购买套餐')
 
         return name

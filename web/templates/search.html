@@ -23,19 +23,7 @@
     <div id="searchTitle">
         <div style="margin-bottom: 10px;font-size: 30px;margin-left: 20px;margin-top:10px">图片库</div>
         <div style="margin-left: 20px;display: flex">
-            <div class="btn-group" role="group" aria-label="...">
-          <div class="btn-group" role="group">
-            <button id="choose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              选择搜索方式
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" id="getMenu">
-                <li><a href="#">百度(默认)</a></li>
-                <li><a href="#">搜狗</a></li>
-                <li><a href="#">Bing</a></li>
-            </ul>
-          </div>
-        </div>
+
             <form action="/search/" method="post" style="display: flex">
                 {% csrf_token %}
                 {#文本框#}
@@ -64,26 +52,31 @@
                   </div>
             {% endfor %}
         </div>
+    <div style="color:darkgray;text-align: center;margin-top: 40px;">
+        <h5> 版权所有©   曾仕邦 </h5>
+        <h5> 2018软件工程实验班 </h5>
+        <h5>   201821096024  </h5>
+    </div>
 {#    导航条#}
-        <nav aria-label="Page navigation" style="text-align: center">
-          <ul class="pagination" >
-            <li>
-              <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-              <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+{#        <nav aria-label="Page navigation" style="text-align: center">#}
+{#          <ul class="pagination" >#}
+{#            <li>#}
+{#              <a href="#" aria-label="Previous">#}
+{#                <span aria-hidden="true">&laquo;</span>#}
+{#              </a>#}
+{#            </li>#}
+{#            <li><a href="#">1</a></li>#}
+{#            <li><a href="#">2</a></li>#}
+{#            <li><a href="#">3</a></li>#}
+{#            <li><a href="#">4</a></li>#}
+{#            <li><a href="#">5</a></li>#}
+{#            <li>#}
+{#              <a href="#" aria-label="Next">#}
+{#                <span aria-hidden="true">&raquo;</span>#}
+{#              </a>#}
+{#            </li>#}
+{#          </ul>#}
+{#        </nav>#}
     <!-- Modal -->
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">

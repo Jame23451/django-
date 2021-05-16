@@ -17,30 +17,23 @@
 
     <body class="text-center" style="background-image: url({% static 'img/index/index1.png' %});background-size: 100% ;background-repeat: no-repeat">
     <div class="index">
-        <div class="title" style="margin-bottom: 50px;color: #e8e8e8">图片库</div>
+        <div class="title" style="margin-bottom: 50px;color: #e8e8e8">web爬虫系统</div>
         <div class="toCenter">
-        <div class="btn-group" role="group" aria-label="...">
-          <div class="btn-group" role="group">
-            <button id="choose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              选择搜索方式
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" id="getMenu">
-                <li><a href="#">百度(默认)</a></li>
-                <li><a href="#">搜狗</a></li>
-                <li><a href="#">Bing</a></li>
-            </ul>
-          </div>
-        </div>
+
             <form action="/search/" method="post" style="display: flex">
                 {% csrf_token %}
                 {#文本框#}
                 <p><input type="text" class="form-control" placeholder="输入关键字..." name="question" style="margin-top: 10px;margin-left: 10px;width: 400px;height: 34px"></p>
                 <input  class="form-control" type="submit" style="margin-top: 10px;margin-left: 10px;width: 70px;height: 34px;">
             </form>
+
         </div>
     </div>
-
+<div style="margin-top: 30px">
+                <h5> 版权所有©   曾仕邦 </h5>
+                <h5> 2018软件工程实验班 </h5>
+                <h5>   201821096024  </h5>
+            </div>
 
 
 

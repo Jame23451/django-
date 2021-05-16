@@ -1,0 +1,45 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block title %} 套餐 {% endblock %}
+
+{% block css %}
+    <style>
+        .slogan {
+            font-size: 36px;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="slogan">购买VIP</div>
+            {% for item in policy_list %}
+                    <div class="panel panel-default"style="text-align: center">
+                        <div class="panel-heading" style="text-align: center;">{{ item.title }}</div>
+                        <div class="panel-body">
+                            <p style="text-align: center;font-size: 25px;">
+                                ¥ {{ item.price }}
+                            </p>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">最大收藏夹数量：{{ item.project_num }}</li>
+                            <li class="list-group-item">最大收藏夹空间：{{ item.project_space }}G</li>
+                            <li class="list-group-item">单个收藏夹最多收藏：{{ item.per_file_size }}张</li>
+
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+    <form class="form-inline" method="get" action="/price/pay/" style="text-align: center">
+        <input type="submit" value="立即购买" class="btn btn-primary">
+    </form>
+<div style="color:darkgray;text-align: center;margin-top: 40px;">
+        <h5> 版权所有©   曾仕邦 </h5>
+        <h5> 2018软件工程实验班 </h5>
+        <h5>   201821096024  </h5>
+    </div>
+{% endblock %}

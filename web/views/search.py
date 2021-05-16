@@ -3,8 +3,9 @@ from django.http import HttpResponse, request, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.encoding import escape_uri_path
 
-from scripts.create_folder import addImgToAlbum
+from script.create_folder import addImgToAlbum
 from utils.Crawler import photo
+from web import models
 
 
 def search(request):
@@ -13,6 +14,7 @@ def search(request):
     # print(request.tracer.user.id)
     if not request.POST['question']:
         return render(request, 'index.html')
+    models.UserHistory.objects.create(username=request.tracer.user.username,mobile_phone=request.tracer.user.mobile_phone,search=request.POST['question'])
     resultList = photo.getImgList(target=request.POST['question'], pn="1", userid=request.tracer.user.id)
     return render(request, 'search.html', {'img_list': resultList[2], 'num': resultList[0], 'str': resultList[1],
                                            'question': request.POST['question']})
